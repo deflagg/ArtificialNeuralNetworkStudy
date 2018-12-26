@@ -5,7 +5,7 @@ This repository is to facilitate my study of Artificial Neural Networks.  This i
 Open the ANNLearn.ipynb file to view the Jupyter Notebook or Lab.
 The notebook can be opened in Github, but the images won't be rendered
 
-To install Jupyter the easiest, download and install Anaconda https://www.anaconda.com/download/.  Here you will be able to manage the download and associated libraries.
+To install Jupyter the easiest way, download and install Anaconda https://www.anaconda.com/download/.  Here you will be able to manage the download and associated libraries.
 
 [![Profile](https://github.com/deflagg/ArtificialNeuralNetworkStudy/blob/master/Images/LinkedInBadge.PNG)](https://www.linkedin.com/in/dennisflagg)
 
