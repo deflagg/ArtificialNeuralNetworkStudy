@@ -1,0 +1,568 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{Backpropagation}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{backpropagation}{%
+\section{Backpropagation}\label{backpropagation}}
+
+    Backpropagation is the process by which a neural network learns. The
+goals of this learning process is to tweak a neural network so that it
+outputs the correct answer for a given input. Let's think about how a
+child learns to recognize objects, such as dogs. When a child sees a dog
+for the first time, the child doesn't know what it is and might say it's
+a big cat. To teach the child, a teacher might give the child pictures
+of animals and ask him to pick which ones are dogs. The teacher will
+also tell the child that the answers are on the back of each picture so
+he can check his work. The child would look through the pictures,
+guessing which ones were dogs and then comparing that guess with the
+answer on the back. The child would quickly learn to identify dogs.
+Neural networks can learn in a similar fashion, called supervised
+learning. Neural networks use training data, much like how the child
+used animal pictures with the answers, to learn via backpropagation.
+
+Training data is input and output pairs \((x,y)\), where \(x\) is the
+input and \(y\) is the output. \(y\) is usually called the target. The
+goal is to take the input \(x\), pass it through the neural network
+(feedforward process) and output \(\hat{y}\), where
+\(\hat{y} \approx y\). The problem is, if the parameters of the neural
+network aren't configured (trained) properly, then the neural network
+won't output the correct value, meaning \(\hat{y} \neq y\).
+Backpropagation is the process by which the parameters of the neural
+network are adjusted, so that when passing \(x\) through the neural
+network, it will produce \(\hat{y}\), where \(\hat{y} \approx y\). More
+concretely, if the training example is \((dog picture, yes)\), then when
+passing a dog picture through a neural network it should output yes. If
+the neural network is not trained, then most likely it will output no
+when indeed the picture is of a dog. The neural network would need to be
+adjusted through backpropagation so that the neural network would output
+the correct value, yes. To learn this process, we will look at a very
+simple neural network and build on it. Below is the network we'll be
+using.
+
+figure:~~Simpe Neural Network - 4 Neurons
+
+In the figure above there's 1 input (green), 2 hidden (orange), and 1
+output (blue) layer
+
+\begin{quote}
+\(a_n\) represents the activation function of the neuron\\
+\(w_n\) represents the weights of the network\\
+\(\hat{y}\) is the value of the output node
+\end{quote}
+
+The way backpropagation works, is to reduce the error/cost in the neural
+network as efficiently as possible. This is done by computing the
+error/cost of the output and adjusting the weights and biases in the
+network going backwards through each layer. So the cost of the above
+neural network would be dependent on all the weights and biases in the
+network which can be represented like
+\(Cost = C(w_1, b_1, w_2, b_2, w_3, a_3)\). This neural network is even
+too big to start describing the backpropagation process. Let's focus on
+the last two neurons and their connection,
+
+figure:~~Simpe Neural Network - 1 Neuron
+
+The neurons are labeled \(a^{L-1}\) and \(a^{L}\), where \(L\) is an
+index for a layer. So since we have a 3 layer network, \(L = 3\)\\
+Also note that \(a^{(L)}\) and \(\hat{y}\) are the exact same thing.
+Going forward, until otherwised noted, I will not use the \(\hat{y}\)
+notation, but only \(a^{(L)}\) notation. It will make the formulas
+easier to read and understand.
+
+During the feedforward process, a training example is passed forward
+through the network and produces an output, \(a^{(L)}\). In other words,
+\(a^{(L)}\) is the neural networks guess. So the first step in the
+backpropagation process is to compute the cost by computing the
+difference of the guess, \(a^{(L)}\), from the target, \(y\). The
+formula to compute the cost is as follows (note that the formulas are
+color coded so they can be easily tracked),
+
+\begin{quote}
+\(\color{red}{ C_0 = (\color{green}{ a^{(L)} } - y)^{2} }\)
+\end{quote}
+
+\(C_0\) is the cost of the first training example, where \(C\) is for
+Cost and subscript 0 is for first training example.
+
+Remember that, \textgreater{}
+\(\color{green}{ a^{(L)} } = \color{green}{ \sigma( } \color{blue}{ w^{(L)}a^{(L-1)}+b^{(L)} } \color{green}{ ) }\)
+
+It's better to think about \(a^{L}\) as the following, so that the math
+and programming work out better,
+
+\begin{quote}
+\(\color{blue}{ z^{(L)} = w^{(L)}a^{(L-1)}+b^{(L)} }\)\\
+\(\color{green}{ a^{(L)} = \sigma(z^{(L)}) }\)
+\end{quote}
+
+These equations can be easily visualized using a computational graph
+like the one below,
+
+figure:~~Computation Graph
+
+As you can see from this graph, each function is composed of 1 or more
+functions or parameters. For instance, \(\color{red}{ C_0 }\) is
+composed of \(\color{green}{ a^{(L)} }\) and \(\color{red}{ y }\).
+\(\color{green}{ a^{(L)} }\) is composed of \(\color{blue}{ z^{(L)} }\),
+which is composed of \(\color{blue}{ w^{(L)} }\),
+\(\color{blue}{ a^{(L-1)} }\), and \(\color{blue}{ b^{(L)} }\).
+
+Another way to look at the 3 equations is when it's all combined.
+
+\(\color{red}{ C_0 = (\color{green}{ \sigma(\color{blue}{ w^{(L)}a^{(L-1)}+b^{(L)} }) } - y)^{2} }\)
+
+As a reminder, the goal is to reduce the cost \(C_0\) by changing the
+weights, i.e. \(w^{(L)}\). While looking at the computational graph
+and/or equations, the question is, ``How is the cost \(C_0\) affected by
+small changes in the weight \(w^{(L)}\)?''. For anyone who studied
+higher level mathematics, this will quickly remind you of Calculus.
+Looking at how small changes of parameters affect the function can be
+done with Calculus using derivatives, and in this case more specifically
+partial derivatives. A small change in \(w^{(L)}\) is represented as
+\(\partial w^{(L)}\) and a small change in \(C_0\) is represented as
+\(\partial C_0\). The \(\partial\) notation can be read as ``del''. A
+better way of asking the question is, ``what is the partial derivative
+of \(C_0\) with respect to \(w^{(L)}\)'' and it can be represented as a
+ratio like so,
+
+\begin{quote}
+\(\dfrac{\partial C_0}{\partial w^{(L)}}\) Note: This is read ``The
+partial derivative of C subcript zero with respect to W L''
+\end{quote}
+
+So, if our cost function is define like so,
+
+\(\color{red}{ C_0 = (\color{green}{ \sigma(\color{blue}{ w^{(L)}a^{(L-1)}+b^{(L)} }) } - y)^{2} }\)
+
+How is the cost \(C_0\) affected by small changes in the weight
+\(w^{(L)}\)?\\
+More formally, what is the partial derivative of \(C_0\) with respect to
+\(w^{(L)}\)?
+
+\(\dfrac{\partial C_0}{\partial w^{(L)}} = \text{ ? }\)
+
+There's a technique to differentiate this function, but we will talk
+about that a little later. For now, let's look at it intuitively to gain
+a better understanding of what's going on. A small change to
+\(\color{blue}{ w^{(L)} }\) causes a small change to
+\(\color{blue}{ z^{(L)} }\) which causes a change to
+\(\color{green}{ a^{(L)} }\) which causes a change to
+\(\color{red}{ C_0 }\).
+
+Let's break this down and look at it in small chunks.
+
+First we have to determine how small changes to
+\(\color{blue}{ w^{(L)} }\) affect \(\color{blue}{ z^{(L)} }\). As
+mentioned before, this question is the same as asking more formally,
+what is the partial derivative of \(\color{blue}{ z^{(L)} }\) with
+respect to \(\color{blue}{ w^{(L)} }\)? We can write the first term like
+so,
+
+\begin{quote}
+\(\dfrac{\partial C_0}{\partial w^{(L)}} = \color{magenta}{ \dfrac{\partial z^{(L)}}{\partial w^{(L)}} }\).
+\end{quote}
+
+Now that we defined how small changes to \(\color{blue}{ w^{(L)} }\)
+affects \(\color{blue}{ z^{(L)} }\), we need to determine how small
+changes to \(\color{blue}{ z^{(L)} }\) affect
+\(\color{green}{ a^{(L)} }\). We define it using partial derivatives
+like we did for the term above,
+
+\begin{quote}
+\(\dfrac{\partial C_0}{\partial w^{(L)}} = \color{magenta}{ \dfrac{\partial z^{(L)}}{\partial w^{(L)}} } \color{orange}{ \dfrac{\partial a^{(L)}}{\partial z^{(L)}} }\).
+\end{quote}
+
+Finally, we need to define how a small change to
+\(\color{green}{ a^{(L)} }\) affects \(\color{teal}{ C_0 }\),
+
+\begin{quote}
+\(\dfrac{\partial C_0}{\partial w^{(L)}} = \color{magenta}{ \dfrac{\partial z^{(L)}}{\partial w^{(L)}} } \color{orange}{ \dfrac{\partial a^{(L)}}{\partial z^{(L)}} } \color{teal}{ \dfrac{\partial C_0}{\partial a^{(L)}} }\).
+\end{quote}
+
+This final equation that we have built up term by term answers the
+question, ``What is the partial derivative of \(C_0\) with respect to
+\(w^{(L)}\)?'' As mentioned earlier, there is a technique to
+differentiate this function and if you are familiar with Calculus you'll
+be familiar with this Rule. The
+\href{https://en.wikipedia.org/wiki/Chain_rule}{Chain Rule} describes
+how to compute the derivative of a function of functions or a composite
+function, i.e.) \(f(g(x))\). There are a lot of articles on the Chain
+Rule, so I won't be going into the details here, but basically it says,
+
+\$\dfrac{d}{dx} f(g(x)) = \dfrac{d}{dx} f(g(x)) \dfrac{d}{dx} g(x) \$
+
+or better notation is to use the prime notation \(^{\prime}\) to
+represent derivatives. So to make the formula more readable, you'll
+often see it like the following,
+
+\$f\^{}\{\prime\}(g(x)) = f\^{}\{\prime\}(g(x)) g\^{}\{\prime\}(x) \$
+
+If you look at how the forumla for the function
+\(\dfrac{\partial C_0}{\partial w^{(L)}}\) above, you'll see that it's
+just the chain rule. (Hint: Reverse the terms and it becomes very clear)
+
+Now that we have the formula for the
+\(\dfrac{\partial C_0}{\partial w^{(L)}}\), let's now compute the
+derivatives for each term. There're a lot of symbols on the page, so
+let's re-group and lessen the confusion. I listed the computed formulas
+so far.
+
+\(\color{red}{ C_0 = (a^{(L)} - y)^{2} }\)
+
+\(\color{blue}{ z^{(L)} = w^{(L)}a^{(L-1)}+b^{(L)} }\)
+
+\(\color{green}{ a^{(L)} = \sigma(z^{(L)}) }\)
+
+\(\dfrac{\partial C_0}{\partial w^{(L)}} = \color{magenta}{ \dfrac{\partial z^{(L)}}{\partial w^{(L)}} } \color{orange}{ \dfrac{\partial a^{(L)}}{\partial z^{(L)}} } \color{teal}{ \dfrac{\partial C_0}{\partial a^{(L)}} }\)
+
+Now let's compute the derivative of the last formula starting from the
+last term. The functions we'll be deriving are the first 3 above
+({red},{ blue},{ green}). I'm not going to go through differentiating
+each of the 3 functions step-by-step, so I'll just provide them.
+
+\(\color{teal}{ \dfrac{\partial C_0}{\partial a^{(L)}} } = 2(a^{(L)} - 1)\)\\
+\(\color{orange}{ \dfrac{\partial a^{(L)}}{\partial z^{(L)}} } = \sigma^{\prime}(z^{(L)})\)\\
+\(\color{magenta}{ \dfrac{\partial z^{(L)}}{\partial w^{(L)}} } = a^{(L-1)}\)
+
+Therefore,
+
+\(\dfrac{\partial C_0}{\partial w^{(L)}} = \color{magenta}{ \dfrac{\partial z^{(L)}}{\partial w^{(L)}} } \color{orange}{ \dfrac{\partial a^{(L)}}{\partial z^{(L)}} } \color{teal}{ \dfrac{\partial C_0}{\partial a^{(L)}} } = a^{(L-1)} \sigma^{\prime}(z^{(L)}) 2(a^{(L)} - 1)\)
+
+Finally, we have formula to compute the cost of one training example on
+a 1-layer neural network. We have nearly everything we need to compute
+the cost for small changes in \(w^{L}\), but remember this was only for
+one training example. This is why we represented the cost function as
+\(C_0\) where the subscript 0 means first training example. The total
+cost is the average cost of all computed costs in the whole training
+set. So the formula to compute that is as follows
+
+\(\dfrac{\partial C}{\partial w^{(L)}} = \dfrac{1}{n} \sum\limits_{k=0}^{n-1} \dfrac{\partial C_k}{\partial w^{(L)}}\)
+
+Let's break this down. \(n\) is the number of training examples. This
+formula is summing up all the costs for each training example like so,
+\(\sum\limits_{k=0}^{n-1} \dfrac{\partial C_k}{\partial w^{(L)}}\) and
+then divides by the number of training examples using this term,
+\(\dfrac{1}{n}\). It's an average of all costs over the entire training
+set.
+
+Looking back at the computational graph above, these calculations were
+only for the \(w^{(L)}\) parameter. Luckily there's not much difference
+with the other parameters. For the last two paramters you'll follow the
+same process. You'll end up with the 3 following equations below.
+
+\(\dfrac{\partial C_0}{\partial w^{(L)}} = \dfrac{\partial z^{(L)}}{\partial w^{(L)}} \dfrac{\partial a^{(L)}}{\partial z^{(L)}} \dfrac{\partial C_0}{\partial a^{(L)}} = a^{(L-1)} \sigma^{\prime}(z^{(L)}) 2(a^{(L)} - 1)\)\\
+\(\dfrac{\partial C_0}{\partial b^{(L)}} = \dfrac{\partial z^{(L)}}{\partial b^{(L)}} \dfrac{\partial a^{(L)}}{\partial z^{(L)}} \dfrac{\partial C_0}{\partial a^{(L)}} = 1 \sigma^{\prime}(z^{(L)}) 2(a^{(L)} - 1)\)\\
+\(\dfrac{\partial C_0}{\partial a^{(L-1)}} = \dfrac{\partial z^{(L)}}{\partial a^{(L-1)}} \dfrac{\partial a^{(L)}}{\partial z^{(L)}} \dfrac{\partial C_0}{\partial a^{(L)}} = w^{(L)} \sigma^{\prime}(z^{(L)}) 2(a^{(L)} - 1)\)
+
+\textbf{Note 1:} Sometime you'll see the cost function multiplied by a
+\(\dfrac{1}{2}\). This is to cancel out the exponent during
+differentiation.
+
+Original: \(C_0 = (a^{(L)} - y)^{2}\)\\
+New: \(C_0 = \dfrac{1}{2}(a^{(L)} - y)^{2}\)
+
+When the new cost function is differentiated, the 2 cancels out. This
+just helps to simplify the equation
+
+Originial: \(\dfrac{\partial C_0}{\partial a^{(L)}} = 2(a^{(L)} - 1)\)\\
+New: \(\dfrac{\partial C_0}{\partial a^{(L)}} = (a^{(L)} - 1)\)
+
+\textbf{Note 2:} Another thing to keep in mind is sometimes you'll see
+the cost function written two ways
+
+Original: \(C_0 = (a^{(L)} - y)^{2}\)\\
+New: \(C_0 = (y - a^{(L)})^{2}\)
+
+This is fine, but when you update the neural network parameters you will
+either add or subtract
+
+Original: add the update\\
+New: subtract the update
+
+That's basically it. I'll write more on how this applies to a more
+complex network
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
